@@ -5,6 +5,7 @@ jobs:
     environment:
       NODE_ENV: 'test'
       MONGOMS_DEBUG : 1
+      JWT_SECRET : 'f20971cd002aee78f425219fcf1e2769e84efcff55a4f57187e66de1557068a6b8fe7b0ef774d8b9ab3a5acdc56fea2a4b16adfa334cfe327dba81ed09410023'
       
     working_directory: ~/notes-api
     docker:
