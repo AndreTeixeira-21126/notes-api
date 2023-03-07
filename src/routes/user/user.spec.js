@@ -58,4 +58,21 @@ describe('User routes', () => {
     expect(response.body).toHaveProperty('error')
     expect(response.body.field).toBe('email')
   })
+
+  it('should login user', async () => {
+    await request.post('/users/register').send({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+      confirm: '123456'
+    })
+
+    const response = await request.post('/users/login').send({
+      email: 'johndoe@example.com',
+      password: '123456'
+    })
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty('token')
+  })
 })
