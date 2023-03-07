@@ -5,6 +5,7 @@ jobs:
     environment:
       NODE_ENV: 'test'
       MONGOMS_DEBUG : 1
+      
     working_directory: ~/notes-api
     docker:
       - image: cimg/node:19.7.0
@@ -25,6 +26,8 @@ jobs:
           paths:
             - node_modules
       
+      - run:
+          echo "MONGO_URI = 'mongodb://localhost:27017/'" > ./.env
       - run:
           npx eslint
 
