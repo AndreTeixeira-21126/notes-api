@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-const { MongoMemoryServer } = require('mongodb-memory-server')
-
-const mongod = MongoMemoryServer.create()
+const dotenv = require('dotenv')
+const uuid = require('uuid').v4
+dotenv.config()
 
 const connect = async () => {
-  const uri = await (await mongod).getUri()
+  const uri = `${process.env.MONGO_URI}${uuid()}`
   const mongooseOpts = {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -15,7 +15,7 @@ const connect = async () => {
 const closeDatabase = async () => {
   await mongoose.connection.dropDatabase()
   await mongoose.connection.close()
-  await (await mongod).stop()
+  await mongoose.disconnect()
 }
 
 const clearDatabase = async () => {
